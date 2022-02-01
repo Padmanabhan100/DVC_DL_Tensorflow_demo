@@ -28,6 +28,7 @@ def get_data(config_path):
     source_download_dirs = config['source_download_dirs']
     local_data_dirs = config['local_data_dirs']
 
+    # copy content of source dir to local projects dir
     for source_download_dir, local_data_dir in tqdm(zip(source_download_dirs, local_data_dirs), total=2, desc="List of folders", colour='red'):
         create_directory([local_data_dir])
         copy_file(source_download_dir, local_data_dir)
