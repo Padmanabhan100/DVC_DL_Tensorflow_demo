@@ -8,10 +8,10 @@ artifacts:
   TENSORBOARD_ROOT_LOG_DIR: tensorboard_log_dir
   CALLBACKS_DIR: callbacks
 
-source_download_dirs: # list of directory of source data for training
+source_download_dirs: # source data outside project
   - ../outside_data/dog
   - ../outside_data/cat
 
-local_data_dirs:  # list of directory where we will store the data
+local_data_dirs:  # list of directory where the outside source data will be copied
   - data/dog
   - data/cat

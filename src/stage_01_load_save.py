@@ -4,10 +4,17 @@ import pandas as pd
 import os
 from tqdm import tqdm
 import shutil
+import logging
 
+# create a log string and create a log directory
+logging_str = "[%(asctime)s: %(levelname)s: %(module)s]: %(message)s"
+log_dir = "logs"
+create_directory([log_dir])
+logging.basicConfig(filename=os.path.join(log_dir,"running_logs.log"), 
+                    level=logging.INFO, format=logging_str, filemode='a')
 
+# create a function to copy file from one source path to another destination path
 def copy_file(source_download_dir,local_data_dir):
-    print(source_download_dir,"\n\n\n")
     list_of_files = os.listdir(source_download_dir)
     N = len(list_of_files)
     for file in tqdm(list_of_files, total=N, desc=f'copying file from {source_download_dir} to {local_data_dir}',colour='green'):
@@ -36,4 +43,10 @@ if __name__ == "__main__":
     # call the method
     parsed_args = args.parse_args()
 
-    get_data(config_path = parsed_args.config)
+    try:
+        logging.info("stage-1 started")
+        get_data(config_path = parsed_args.config)
+        logging.info("stage-1 completed! all the data are saved in local")
+    except Exception as e:
+        logging.exception(e)
+        raise e
