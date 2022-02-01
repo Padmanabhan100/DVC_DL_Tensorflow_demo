@@ -1,0 +1,11 @@
+dvc
+pandas
+scikit-learn
+dvc
+tensorflow
+matplotlib
+numpy
+pandas
+tqdm
+PyYAML
+boto3
