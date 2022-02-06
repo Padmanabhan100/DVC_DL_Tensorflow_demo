@@ -1,6 +1,7 @@
 import yaml
 import logging
 import os
+import time
 
 def read_yaml(path_to_yaml:str) -> dict:
     with open(path_to_yaml) as yaml_file:
@@ -17,3 +18,8 @@ def create_directory(dirs:list):
 def save_local_df(data,data_path, index_status=False):
     data.to_csv(data_path,index=index_status)
     logging.info(f"data saved at {data_path}")
+
+def get_timestamp(name):
+    timestamp = time.asctime().replacec(" ","_").replace(":","_")
+    unique_name = f"{name}_at_{timestamp}"
+    return unique_name

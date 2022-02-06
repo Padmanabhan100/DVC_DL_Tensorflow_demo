@@ -1,4 +1,6 @@
+from subprocess import call
 from src.utils.all_utils import read_yaml,create_directory
+from src.utils.callbacks import create_and_save_tensorboard_callbacks, create_and_save_checkpoint_callbacks
 import argparse
 import pandas as pd
 import os
@@ -14,7 +16,24 @@ logging.basicConfig(filename=os.path.join(log_dir,"running_logs.log"),
                     level=logging.INFO, format=logging_str, filemode='a')
 
 def prepare_callbacks(config_path, params_path):
-    pass
+    # reading the config and params yaml file
+    config = read_yaml(config_path)
+
+    artifacts = config['artifacts']
+    artifacts_dir = artifacts['ARTIFACTS_DIR']
+
+    tensorboard_log_dir = os.path.join(artifacts_dir, artifacts['TENSORBOARD_ROOT_LOG_DIR'])
+
+    checkpoint_dir = os.path.join(artifacts_dir, artifacts['CHECKPOINT_DIR'])
+
+    callbacks_dir = os.path.join(artifacts_dir, artifacts['CALLBACKS_DIR'])
+
+    create_directory([tensorboard_log_dir,
+                      checkpoint_dir,
+                      callbacks_dir])
+
+    create_and_save_tensorboard_callbacks(artifacts_dir, artifacts['CALLBACKS_DIR'])
+    create_and_save_checkpoint_callbacks(artifacts_dir, artifacts['CHECKPOINT_DIR'])
 
 if __name__ == "__main__":
     # create a ArgumentParser object
