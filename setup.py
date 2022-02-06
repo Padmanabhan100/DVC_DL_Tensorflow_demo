@@ -13,7 +13,7 @@ setup(
     url="https://github.com/Padmanabhan100/dvc-ml-basics",
     author_email="paddyrolex10@gmail.com",
     packages=['src'],
-    python_requires=">=3.7",
+    python_requires=">=3.6",
     install_requires=[
         "dvc",
         "pandas",
