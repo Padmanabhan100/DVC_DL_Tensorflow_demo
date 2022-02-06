@@ -6,6 +6,7 @@ import os
 from tqdm import tqdm
 import shutil
 import logging
+import io
 
 # create a log string and create a log directory
 logging_str = "[%(asctime)s: %(levelname)s: %(module)s]: %(message)s"
@@ -41,9 +42,16 @@ def prepare_base_model(config_path,params_path):
     )
 
     updated_base_model_path = os.path.join(base_model_dir_path,artifacts['UPDATED_BASE_MODEL_NAME'])
-    logging.info(f"{model.summary()}")
+    def _log_model_summary(model):
+        with io.StringIO() as stream:
+            model.summary(print_fn=lambda x: stream.write(x + '\n'))
+            summary_string = stream.getvalue()
+            return summary_string
+
+    logging.info(f"Full model summary: \n{_log_model_summary(full_model)}")
 
     full_model.save(updated_base_model_path)
+
 
 if __name__ == "__main__":
     # create a ArgumentParser object
