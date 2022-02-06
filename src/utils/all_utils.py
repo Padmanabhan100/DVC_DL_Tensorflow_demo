@@ -20,6 +20,6 @@ def save_local_df(data,data_path, index_status=False):
     logging.info(f"data saved at {data_path}")
 
 def get_timestamp(name):
-    timestamp = time.asctime().replacec(" ","_").replace(":","_")
+    timestamp = time.asctime().replace(" ","_").replace(":","_")
     unique_name = f"{name}_at_{timestamp}"
     return unique_name
