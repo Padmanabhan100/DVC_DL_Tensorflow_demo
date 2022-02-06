@@ -32,8 +32,8 @@ def prepare_callbacks(config_path, params_path):
                       checkpoint_dir,
                       callbacks_dir])
 
-    create_and_save_tensorboard_callbacks(artifacts_dir, artifacts['CALLBACKS_DIR'])
-    create_and_save_checkpoint_callbacks(artifacts_dir, artifacts['CHECKPOINT_DIR'])
+    create_and_save_tensorboard_callbacks(callbacks_dir, tensorboard_log_dir)
+    create_and_save_checkpoint_callbacks(callbacks_dir, checkpoint_dir)
 
 if __name__ == "__main__":
     # create a ArgumentParser object
