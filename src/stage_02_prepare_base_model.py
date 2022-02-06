@@ -1,10 +1,7 @@
 from src.utils.all_utils import read_yaml,create_directory
 from src.utils.models import get_VGG_16_model, prepare_model
 import argparse
-import pandas as pd
 import os
-from tqdm import tqdm
-import shutil
 import logging
 import io
 
